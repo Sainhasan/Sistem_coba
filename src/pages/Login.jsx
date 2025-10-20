@@ -1,65 +1,23 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../Firebase";
+import { Link } from "react-router-dom";
+import UseHandleLogin from "../Function/UseHandleLogin";
 
 export default function Login() {
-  // State untuk menampung input user
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  // Fungsi untuk handle form submit
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
-
-    if (!email || !password) {
-      setError("Email dan password wajib diisi.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      // Panggil Firebase untuk login
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-
-      if (user) {
-        console.log("User berhasil login:", user);
-        setLoading(false);
-        navigate("/");
-      } else {
-        setError("Gagal login. Coba lagi.");
-        setLoading(false);
-      }
-    } catch (err) {
-      setLoading(false);
-      console.error(err);
-
-      // Handling pesan error agar lebih mudah dipahami user
-      if (err.code === "auth/user-not-found") {
-        setError("Email tidak terdaftar.");
-      } else if (err.code === "auth/wrong-password") {
-        setError("Password salah.");
-      } else if (err.code === "auth/invalid-email") {
-        setError("Format email tidak valid.");
-      } else {
-        setError("Terjadi kesalahan, coba lagi.");
-      }
-    }
-  };
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    loading,
+    handleLogin,
+  } = UseHandleLogin();
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="card p-4 shadow-sm w-25">
+      <div
+        className="card p-4 shadow-sm position-relative"
+        style={{ width: "20rem" }}
+      >
         <h3 className="text-center mb-3">Login</h3>
 
         <form onSubmit={handleLogin}>
@@ -85,12 +43,10 @@ export default function Login() {
             />
           </div>
 
-          {error && <div className="alert alert-danger">{error}</div>}
-
           <div className="d-flex align-items-center justify-content-center gap-2">
             <button
               type="submit"
-              className="btn btn-success w-75"
+              className="btn w-75 btn-primary"
               disabled={loading}
             >
               {loading ? "Memproses..." : "Masuk"}
@@ -99,6 +55,20 @@ export default function Login() {
               Regis
             </Link>
           </div>
+          {error && (
+            <div
+              className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+              style={{
+                backdropFilter: "blur(1px)",
+                borderRadius: "0.5rem",
+                zIndex: 10,
+              }}
+            >
+              <div className="alert alert-danger p-1 text-uppercase rounded shadow-lg text-center w-75">
+                <p className="m-0">{error}</p>
+              </div>
+            </div>
+          )}
         </form>
       </div>
     </div>

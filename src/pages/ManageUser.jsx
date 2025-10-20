@@ -1,87 +1,35 @@
-// ManageUser.jsx
-import { useState, useEffect } from "react";
-import {
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-  deleteDoc,
-} from "firebase/firestore";
-import { db } from "../Firebase";
 import { Link } from "react-router-dom";
+import UseManageUser from "../Function/UseManageUser";
+import { useEffect } from "react";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function ManageUser() {
-  const [members, setMembers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("user");
-  const [status, setStatus] = useState("");
-
-  // 🔹 Ambil semua user dari Firestore
-  const fetchMembers = async () => {
-    setLoading(true);
-    const querySnapshot = await getDocs(collection(db, "users"));
-    const list = [];
-    querySnapshot.forEach((doc) => {
-      list.push({ id: doc.id, ...doc.data() });
-    });
-    setMembers(list);
-    setLoading(false);
-  };
+  const {
+    members,
+    loading,
+    error,
+    status,
+    name,
+    setName,
+    email,
+    setEmail,
+    handleAddUser,
+    handleDelete,
+  } = UseManageUser();
 
   useEffect(() => {
-    fetchMembers();
-  }, []);
-
-  const showStatus = (message) => {
-    setStatus(message);
-    setTimeout(() => setStatus(""), 3000); // 🔹 hilangkan status setelah 3 detik
-  };
-
-  const handleAddUser = async (e) => {
-    e.preventDefault();
-    if (!name || !email) return showStatus("Nama dan email wajib diisi");
-    if (role === "admin") return showStatus("Tidak boleh menambahkan admin");
-
-    try {
-      const newUserRef = doc(db, "users", email);
-      await setDoc(newUserRef, {
-        name,
-        email,
-        role,
-        createdAt: new Date(),
-      });
-      showStatus("User berhasil ditambahkan"); // 🔹 pakai helper
-      setName("");
-      setEmail("");
-      setRole("user");
-      fetchMembers();
-    } catch (error) {
-      showStatus("Gagal menambahkan user: " + error.message);
-    }
-  };
-
-  // Hapus user
-  const handleDelete = async (id, userRole) => {
-    if (userRole === "admin") return showStatus("Tidak boleh menghapus admin");
-    if (!confirm("Yakin mau hapus user ini?")) return;
-    try {
-      await deleteDoc(doc(db, "users", id));
-      showStatus("User berhasil dihapus");
-      fetchMembers();
-    } catch (error) {
-      showStatus("Gagal hapus user: " + error.message);
-    }
-  };
+    if (error) toast.error(error);
+    if (status) toast.success(status);
+  }, [error, status]);
 
   return (
     <div className="d-flex flex-column align-items-center vh-100 bg-light p-3">
-      <h3>Manajemen User</h3>
+      <form
+        className="card p-3 mb-3 w-50 position-relative shadow"
+        onSubmit={handleAddUser}
+      >
+        <h5 className="text-center">Add User</h5>
 
-      <form className="card p-3 mb-3 w-50" onSubmit={handleAddUser}>
-        <h5>Tambah User Manual</h5>
         <input
           type="text"
           className="form-control mb-2"
@@ -96,35 +44,22 @@ export default function ManageUser() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <select
-          className="form-select mb-2"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-        >
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
-        <button className="btn btn-success ">Tambah User</button>
-        <div className="d-flex mt-1 justify-content-between gap-1 align-items-center">
-          <Link to="/" className="btn btn-secondary w-25">
-            Kembali ke Home
+
+        <button className="btn btn-success w-100">Tambah User</button>
+
+        <div className="d-flex mt-2 justify-content-between gap-1 align-items-center">
+          <Link to="/" className="btn btn-secondary w-100">
+            Back
           </Link>
-          {status && (
-            <div
-              className=" btn btn-danger w-75  text-center"
-              style={{ opacity: 0.5 }}
-            >
-              {status}
-            </div>
-          )}
         </div>
       </form>
 
-      <div className="table-responsive w-75">
+      {/* 🔹 Tabel user */}
+      <div className="table-responsive w-50 rounded-3 bg-white p-1">
         {loading ? (
           <p>Memuat data...</p>
         ) : (
-          <table className="table table-primary">
+          <table className="table table-borderless table-sm">
             <thead>
               <tr>
                 <th>Nama</th>
@@ -142,8 +77,8 @@ export default function ManageUser() {
                   <td>
                     <button
                       className="btn btn-sm btn-danger"
-                      onClick={() => handleDelete(member.id, member.role)}
-                      disabled={member.role === "admin"} // 🔹 tombol disable kalau admin
+                      onClick={() => handleDelete(member.id)}
+                      disabled={member.role === "admin"}
                     >
                       Hapus
                     </button>
@@ -154,6 +89,7 @@ export default function ManageUser() {
           </table>
         )}
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 }
