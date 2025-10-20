@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { toast } from "react-hot-toast";
 
 export default function UseHandleRegister() {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("success");
   const navigate = useNavigate();
 
   const handleRegister = async (name, email, password, role) => {
     setLoading(true);
     try {
+      // Buat user baru
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -21,16 +21,14 @@ export default function UseHandleRegister() {
       );
       const user = userCredential.user;
 
+      // Simpan data user di Firestore
       await setDoc(doc(db, "users", user.uid), {
         name,
         email,
         role,
         createdAt: new Date(),
       });
-
-      setMessage("Registrasi berhasil!");
-      setMessageType("success");
-      navigate("/");
+  navigate("/");
     } catch (error) {
       let msg = "";
       switch (error.code) {
@@ -46,13 +44,14 @@ export default function UseHandleRegister() {
         default:
           msg = error.message;
       }
-      setMessage(msg);
-      setMessageType("error");
-      setTimeout(() => setMessage(""), 3000);
-    } finally {
+
+      // Tampilkan toast error langsung
+      toast.error(msg);
+
       setLoading(false);
     }
   };
 
-  return { handleRegister, loading, message, messageType };
+  return { handleRegister, loading };
 }
+

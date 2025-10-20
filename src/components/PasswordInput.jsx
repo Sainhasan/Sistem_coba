@@ -25,7 +25,7 @@ export default function PasswordInput({ password, setPassword }) {
           placeholder="Masukkan password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
+          autoComplete="new-password"
           required
         />
         <span

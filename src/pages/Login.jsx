@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import UseHandleLogin from "../Function/UseHandleLogin";
+import { useEffect } from "react";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function Login() {
   const {
@@ -10,7 +12,11 @@ export default function Login() {
     error,
     loading,
     handleLogin,
-  } = UseHandleLogin();
+  }= UseHandleLogin();
+
+  useEffect(() => {
+    if (error) toast.error(error);
+  }, [error]);
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
@@ -29,6 +35,7 @@ export default function Login() {
               placeholder="Masukkan email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
             />
           </div>
 
@@ -40,6 +47,7 @@ export default function Login() {
               placeholder="Masukkan password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
             />
           </div>
 
@@ -55,22 +63,9 @@ export default function Login() {
               Regis
             </Link>
           </div>
-          {error && (
-            <div
-              className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
-              style={{
-                backdropFilter: "blur(1px)",
-                borderRadius: "0.5rem",
-                zIndex: 10,
-              }}
-            >
-              <div className="alert alert-danger p-1 text-uppercase rounded shadow-lg text-center w-75">
-                <p className="m-0">{error}</p>
-              </div>
-            </div>
-          )}
         </form>
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 }

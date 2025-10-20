@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import UseHandleRegister from "../Function/UseHandleRegister";
 import PasswordInput from "../components/PasswordInput";
-import OverlayMessage from "../components/OverlayMessage";
 
 export default function Regis() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
-  const { handleRegister, loading, message, messageType } = UseHandleRegister();
+
+  const { handleRegister, loading } = UseHandleRegister();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +45,7 @@ export default function Regis() {
               placeholder="Masukkan email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
               required
             />
           </div>
@@ -71,12 +72,9 @@ export default function Regis() {
             {loading ? "Mendaftar..." : "Daftar"}
           </button>
         </form>
-
         <p className="text-center mt-2">
           Sudah punya akun? <Link to="/Login">Masuk</Link>
         </p>
-
-        <OverlayMessage type={messageType} message={message} />
       </div>
     </div>
   );
