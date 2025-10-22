@@ -28,12 +28,9 @@ export default function Login() {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-login">
-      <div className="card shadow-lg bg-white bg-opacity-10 p-2 rounded-4">
-        <div
-          className="card p-4 shadow-lg position-relative rounded-4"
-          style={{ width: "20rem" }}
-        >
-          <h3 className="text-left">Login</h3>
+      <div className="bg-white bg-opacity-10 p-2 rounded-4 small-card">
+        <div className="card p-4 shadow-lg position-relative rounded-4">
+          <h3 className="text-center">Login</h3>
           <form className="my-3" onSubmit={handleLogin}>
             <div>
               <label className="form-label">Email</label>
@@ -69,13 +66,14 @@ export default function Login() {
                 </span>
               </div>
             </div>
-            <div className="d-flex align-items-center justify-content-center gap-2 mt-3">
+            <div className="d-flex align-items-center justify-content-center gap-2 mt-3 btn-group-responsive">
               <button
                 type="submit"
-                className="btn w-75 btn-primary rounded-4" 
+                className="btn w-50 btn-primary rounded-4"
                 disabled={loading}
               >
-                <div className=" d-flex justify-content-center"
+                <div
+                  className="d-flex justify-content-center"
                   style={{ height: "100%" }}
                 >
                   {loading ? <Loader /> : "Login"}
@@ -84,7 +82,7 @@ export default function Login() {
 
               <Link
                 to="/regis"
-                className="btn btn-secondary rounded-4 w-25"
+                className="btn btn-secondary rounded-4 w-50 small-btn"
               >
                 Regis
               </Link>

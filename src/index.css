@@ -3,3 +3,19 @@
     background-size: cover;
     background-position: center; 
 }
+@media (max-width: 374px) {
+  .small-card {
+    width: 80% !important;
+  }
+  .btn-group-responsive {
+    flex-direction: column !important;
+  }
+  .btn-group-responsive .btn {
+    width: 100% !important;
+  }
+  .sf input,select{
+    font-size: 0.9rem !important;
+  }
+}
+
+

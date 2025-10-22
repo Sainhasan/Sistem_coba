@@ -19,65 +19,64 @@ export default function Regis() {
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center vh-100 bg-light bg-login">
-      <div className="card bg-white bg-opacity-10 p-2 rounded-4 mb-3">
-      <div
-        className="card p-4 shadow-lg position-relative rounded-4"
-        style={{ width: "20rem" }}
-      >
-        <h3 className="text-center mb-3">Registrasi</h3>
+      <div className="bg-white bg-opacity-10 p-2 rounded-4 small-card">
+        <div
+          className="card p-4 shadow-lg position-relative rounded-4"
+        >
+          <h3 className="text-center mb-3">Registrasi</h3>
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label">Nama</label>
-            <input
-              type="text"
-              className="form-control rounded-4"
-              placeholder="Masukkan nama lengkap"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="sf">
+            <div className="mb-3">
+              <label className="form-label">Nama</label>
+              <input
+                type="text"
+                className="form-control rounded-4"
+                placeholder="Masukkan nama lengkap"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
 
-          <div className="mb-3">
-            <label className="form-label">Email</label>
-            <input
-              type="email"
-              className="form-control rounded-4"
-              placeholder="Masukkan email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="username"
-              required
-            />
-          </div>
+            <div className="mb-3">
+              <label className="form-label">Email</label>
+              <input
+                type="email"
+                className="form-control rounded-4"
+                placeholder="Masukkan email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="username"
+                required
+              />
+            </div>
 
-          <PasswordInput password={password} setPassword={setPassword} />
+            <PasswordInput password={password} setPassword={setPassword} />
 
-          <div className="mb-3">
-            <label className="form-label">Role</label>
-            <select
-              className="form-select rounded-4"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
+            <div className="mb-3">
+              <label className="form-label">Role</label>
+              <select
+                className="form-select rounded-4"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary w-100 rounded-4"
+              disabled={loading}
             >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary w-100 rounded-4"
-            disabled={loading}
-          >
-            {loading ? <Loader/> : "Daftar"}
-          </button>
-        </form>
-        <p className="text-center mt-2">
-          Sudah punya akun? <Link to="/Login">Masuk</Link>
-        </p>
-      </div>
+              {loading ? <Loader /> : "Daftar"}
+            </button>
+          </form>
+          <p className="text-center mt-2">
+            Sudah punya akun? <Link to="/Login">Masuk</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
