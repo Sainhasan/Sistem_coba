@@ -72,7 +72,7 @@ export default function Login() {
             <div className="d-flex align-items-center justify-content-center gap-2 mt-3">
               <button
                 type="submit"
-                className="btn w-75 btn-primary rounded-4" // 🔹 kunci ukuran tetap
+                className="btn w-75 btn-primary rounded-4" 
                 disabled={loading}
               >
                 <div className=" d-flex justify-content-center"

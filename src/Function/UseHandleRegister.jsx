@@ -39,6 +39,9 @@ export default function UseHandleRegister() {
         case "auth/weak-password":
           msg = "Password terlalu lemah.";
           break;
+        case "auth/password-does-not-meet-requirements":
+          msg = "Password tidak memenuhi persyaratan.";
+          break;
         default:
           msg = error.message;
       }

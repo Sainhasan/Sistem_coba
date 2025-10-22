@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import UseHandleRegister from "../Function/UseHandleRegister";
 import PasswordInput from "../components/PasswordInput";
+import Loader from "../components/Loader";
 
 export default function Regis() {
   const [name, setName] = useState("");
@@ -17,9 +18,10 @@ export default function Regis() {
   };
 
   return (
-    <div className="d-flex flex-column align-items-center justify-content-center vh-100 bg-light">
+    <div className="d-flex flex-column align-items-center justify-content-center vh-100 bg-light bg-login">
+      <div className="card bg-white bg-opacity-10 p-2 rounded-4 mb-3">
       <div
-        className="card p-4 shadow-sm position-relative"
+        className="card p-4 shadow-lg position-relative rounded-4"
         style={{ width: "20rem" }}
       >
         <h3 className="text-center mb-3">Registrasi</h3>
@@ -29,7 +31,7 @@ export default function Regis() {
             <label className="form-label">Nama</label>
             <input
               type="text"
-              className="form-control"
+              className="form-control rounded-4"
               placeholder="Masukkan nama lengkap"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -41,7 +43,7 @@ export default function Regis() {
             <label className="form-label">Email</label>
             <input
               type="email"
-              className="form-control"
+              className="form-control rounded-4"
               placeholder="Masukkan email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -55,7 +57,7 @@ export default function Regis() {
           <div className="mb-3">
             <label className="form-label">Role</label>
             <select
-              className="form-select"
+              className="form-select rounded-4"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
@@ -66,15 +68,16 @@ export default function Regis() {
 
           <button
             type="submit"
-            className="btn btn-primary w-100"
+            className="btn btn-primary w-100 rounded-4"
             disabled={loading}
           >
-            {loading ? "Mendaftar..." : "Daftar"}
+            {loading ? <Loader/> : "Daftar"}
           </button>
         </form>
         <p className="text-center mt-2">
           Sudah punya akun? <Link to="/Login">Masuk</Link>
         </p>
+      </div>
       </div>
     </div>
   );

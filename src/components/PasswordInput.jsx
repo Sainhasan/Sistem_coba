@@ -21,7 +21,7 @@ export default function PasswordInput({ password, setPassword }) {
       <div className="position-relative">
         <input
           type={type}
-          className="form-control pe-5"
+          className="form-control pe-5 rounded-4"
           placeholder="Masukkan password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
