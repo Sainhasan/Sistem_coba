@@ -3,14 +3,14 @@
     background-size: cover;
     background-position: center; 
 }
-@media (max-width: 765px) {
+@media (min-width: 765px) {
   .small-card {
-    width: 80% !important;
+    width: 50% !important;
   }
   
 }
 
-@media (max-width: 425px) {
+@media (max-width: 616px) {
     .btn-group-responsive {
     flex-direction: column !important;
   } 
@@ -19,6 +19,9 @@
   }
   .sf input,select{
     font-size: 0.9rem !important;
+  }
+  .small-card {
+    width: 80% !important;
   }
 }
 
