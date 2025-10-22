@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase";
+import { toast } from "react-hot-toast";
 
 export default function UseHandleLogin() {
   const [email, setEmail] = useState("");
@@ -24,9 +25,9 @@ export default function UseHandleLogin() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
       if (user) {
-        navigate("/");
+        toast.success("Login berhasil!");
+        setTimeout(() => navigate("/"), 2000);
       }
     } catch (err) {
       console.error(err);

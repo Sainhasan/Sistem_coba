@@ -19,7 +19,7 @@ export default function Regis() {
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center vh-100 bg-light bg-login">
-      <div className="bg-white bg-opacity-10 p-2 rounded-4 small-card">
+      <div className="bg-white bg-opacity-10 p-2 rounded-4 small-card w-50">
         <div
           className="card p-4 shadow-lg position-relative rounded-4"
         >
