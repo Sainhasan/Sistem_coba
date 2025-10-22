@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import UseHandleLogin from "../Function/UseHandleLogin";
-import { useEffect } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import Loader from "../components/Loader.jsx";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
   const {
@@ -12,7 +14,13 @@ export default function Login() {
     error,
     loading,
     handleLogin,
-  }= UseHandleLogin();
+  } = UseHandleLogin();
+
+  const [type, setType] = useState("password");
+
+  const handleToggle = () => {
+    setType((prevType) => (prevType === "password" ? "text" : "password"));
+  };
 
   useEffect(() => {
     if (error) toast.error(error);
@@ -38,17 +46,28 @@ export default function Login() {
               autoComplete="username"
             />
           </div>
-
           <div className="mb-3">
             <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Masukkan password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-            />
+            <div className="position-relative">
+              <input
+                type={type}
+                className="form-control pe-5"
+                placeholder="Masukkan password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+              <span
+                className="position-absolute top-50 end-0 translate-middle-y me-3"
+                onClick={handleToggle}
+              >
+                {type === "password" ? (
+                  <FaEyeSlash size={20} />
+                ) : (
+                  <FaEye size={20} />
+                )}
+              </span>
+            </div>
           </div>
 
           <div className="d-flex align-items-center justify-content-center gap-2">
@@ -57,7 +76,7 @@ export default function Login() {
               className="btn w-75 btn-primary"
               disabled={loading}
             >
-              {loading ? "Memproses..." : "Masuk"}
+              {loading ? <Loader /> : "Login"}
             </button>
             <Link to="/regis" className="btn btn-secondary w-25">
               Regis

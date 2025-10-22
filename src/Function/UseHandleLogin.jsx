@@ -1,4 +1,3 @@
-// src/Function/HandleLogin.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -27,16 +26,10 @@ export default function UseHandleLogin() {
       const user = userCredential.user;
 
       if (user) {
-        setLoading(false);
         navigate("/");
-      } else {
-        setError("Gagal login. Coba lagi.");
-        setLoading(false);
       }
     } catch (err) {
-      setLoading(false);
       console.error(err);
-
       if (err.code === "auth/user-not-found") {
         setError("Email tidak terdaftar.");
       } else if (err.code === "auth/wrong-password") {
@@ -45,11 +38,12 @@ export default function UseHandleLogin() {
         setError("Format email tidak valid.");
       } else if (err.code === "auth/invalid-credential"){
         setError("Akun tidak valid.");
-      } else {
-        setError(error.message);
+      } else setError(error.message);
+    } finally {
+        setLoading(false);
       }
     }
-  };
+  
 
   return {
     email,

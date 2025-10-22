@@ -1,4 +1,3 @@
-// src/Function/UseHandleRegister.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../Firebase";
@@ -27,7 +26,7 @@ export default function UseHandleRegister() {
       });
 
       toast.success("Registrasi berhasil!");
-      setTimeout(() => navigate("/"), 1000); // biar toast sempat muncul dulu
+      setTimeout(() => navigate("/"), 1000);
     } catch (error) {
       let msg = "";
       switch (error.code) {
