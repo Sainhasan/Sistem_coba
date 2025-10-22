@@ -89,7 +89,6 @@ export default function ManageUser() {
           </table>
         )}
       </div>
-      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 }

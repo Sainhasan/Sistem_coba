@@ -43,8 +43,10 @@ export default function UseHandleLogin() {
         setError("Password salah.");
       } else if (err.code === "auth/invalid-email") {
         setError("Format email tidak valid.");
+      } else if (err.code === "auth/invalid-credential"){
+        setError("Akun tidak valid.");
       } else {
-        setError("Terjadi kesalahan, coba lagi.");
+        setError(error.message);
       }
     }
   };

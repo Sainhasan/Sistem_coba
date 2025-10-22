@@ -65,7 +65,6 @@ export default function Login() {
           </div>
         </form>
       </div>
-      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 }

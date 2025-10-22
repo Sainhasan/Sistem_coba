@@ -9,11 +9,9 @@ import { toast } from "react-hot-toast";
 export default function UseHandleRegister() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   const handleRegister = async (name, email, password, role) => {
     setLoading(true);
     try {
-      // Buat user baru
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -21,14 +19,15 @@ export default function UseHandleRegister() {
       );
       const user = userCredential.user;
 
-      // Simpan data user di Firestore
       await setDoc(doc(db, "users", user.uid), {
         name,
         email,
         role,
         createdAt: new Date(),
       });
-  navigate("/");
+
+      toast.success("Registrasi berhasil!");
+      setTimeout(() => navigate("/"), 1000); // biar toast sempat muncul dulu
     } catch (error) {
       let msg = "";
       switch (error.code) {
@@ -44,14 +43,10 @@ export default function UseHandleRegister() {
         default:
           msg = error.message;
       }
-
-      // Tampilkan toast error langsung
       toast.error(msg);
-
+    } finally {
       setLoading(false);
     }
   };
-
   return { handleRegister, loading };
 }
-
