@@ -27,62 +27,70 @@ export default function Login() {
   }, [error]);
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div
-        className="card p-4 shadow-sm position-relative"
-        style={{ width: "20rem" }}
-      >
-        <h3 className="text-center mb-3">Login</h3>
-
-        <form onSubmit={handleLogin}>
-          <div className="mb-3">
-            <label className="form-label">Email</label>
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Masukkan email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="username"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <div className="position-relative">
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-login">
+      <div className="card shadow-lg bg-white bg-opacity-10 p-2 rounded-4">
+        <div
+          className="card p-4 shadow-lg position-relative rounded-4"
+          style={{ width: "20rem" }}
+        >
+          <h3 className="text-left">Login</h3>
+          <form className="my-3" onSubmit={handleLogin}>
+            <div>
+              <label className="form-label">Email</label>
               <input
-                type={type}
-                className="form-control pe-5"
-                placeholder="Masukkan password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
+                type="email"
+                className="form-control pe-4 rounded-4"
+                placeholder="Masukkan email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="username"
               />
-              <span
-                className="position-absolute top-50 end-0 translate-middle-y me-3"
-                onClick={handleToggle}
-              >
-                {type === "password" ? (
-                  <FaEyeSlash size={20} />
-                ) : (
-                  <FaEye size={20} />
-                )}
-              </span>
             </div>
-          </div>
+            <div className="my-3">
+              <label className="form-label">Password</label>
+              <div className="position-relative">
+                <input
+                  type={type}
+                  className="form-control pe-5 rounded-4"
+                  placeholder="Masukkan password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                />
+                <span
+                  className="position-absolute top-50 end-0 translate-middle-y me-3"
+                  onClick={handleToggle}
+                >
+                  {type === "password" ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
+                </span>
+              </div>
+            </div>
+            <div className="d-flex align-items-center justify-content-center gap-2 mt-3">
+              <button
+                type="submit"
+                className="btn w-75 btn-primary rounded-4" // 🔹 kunci ukuran tetap
+                disabled={loading}
+              >
+                <div className=" d-flex justify-content-center"
+                  style={{ height: "100%" }}
+                >
+                  {loading ? <Loader /> : "Login"}
+                </div>
+              </button>
 
-          <div className="d-flex align-items-center justify-content-center gap-2">
-            <button
-              type="submit"
-              className="btn w-75 btn-primary"
-              disabled={loading}
-            >
-              {loading ? <Loader /> : "Login"}
-            </button>
-            <Link to="/regis" className="btn btn-secondary w-25">
-              Regis
-            </Link>
-          </div>
-        </form>
+              <Link
+                to="/regis"
+                className="btn btn-secondary rounded-4 w-25"
+              >
+                Regis
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

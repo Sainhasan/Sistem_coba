@@ -38,6 +38,8 @@ export default function UseHandleLogin() {
         setError("Format email tidak valid.");
       } else if (err.code === "auth/invalid-credential"){
         setError("Akun tidak valid.");
+      } else if (err.code === "auth/too-many-requests"){
+        setError("Jangan Spam Meki");
       } else setError(error.message);
     } finally {
         setLoading(false);
