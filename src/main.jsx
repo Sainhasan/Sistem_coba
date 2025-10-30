@@ -3,7 +3,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Toaster } from "react-hot-toast";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Regis from './pages/Regis'
@@ -22,6 +22,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/regis" element={<Regis />} />
         <Route path="/manage" element={<ManageUser/>} />
       </Routes>
+      <SpeedInsights />
     </BrowserRouter>
   </StrictMode>
 )
