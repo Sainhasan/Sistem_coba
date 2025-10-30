@@ -1,0 +1,47 @@
+.bg-login {
+    background-image: url("./assets/Bg-Login2.jpg");
+    background-size: cover;
+    background-position: center; 
+}
+
+/* Mobile = 480  tablet = 768  laptop HD = 992 / 2K = 1200*/
+
+@media (min-width: 768px) {
+  .small-card {
+    width: 50% !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .small-card {
+    width: 40% !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .small-card {
+    width: 30% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-group-responsive {
+    flex-direction: column !important;
+  }
+
+  .btn-group-responsive .btn {
+    width: 100% !important;
+  }
+
+  .sf input,
+  .sf select {
+    font-size: 0.9rem !important;
+  }
+
+  .small-card {
+    width: 85% !important;
+  }
+}
+
+
+
