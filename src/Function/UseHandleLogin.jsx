@@ -30,7 +30,7 @@ export default function UseHandleLogin() {
         setTimeout(() => navigate("/"), 2000);
       }
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       if (err.code === "auth/user-not-found") {
         setError("Email tidak terdaftar.");
       } else if (err.code === "auth/wrong-password") {
