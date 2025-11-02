@@ -4,18 +4,41 @@
     background-position: center; 
 }
 
+html{
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.fade-in {
+  animation: fadeIn 0.9s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Mobile = 480  tablet = 768  laptop HD = 992 / 2K = 1200*/
 
 @media (min-width: 768px) {
   .small-card {
     width: 50% !important;
   }
+  
 }
 
-@media (min-width: 992px) {
+@media (min-width: 990px) {
   .small-card {
     width: 40% !important;
   }
+ .FlexNone {
+  display: flex !important;
+}
+  
 }
 
 @media (min-width: 1200px) {
@@ -40,6 +63,10 @@
 
   .small-card {
     width: 85% !important;
+  }
+
+  .FlexNone {
+    display:block !important;
   }
 }
 

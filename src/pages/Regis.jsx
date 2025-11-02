@@ -74,7 +74,7 @@ export default function Regis() {
             </button>
           </form>
           <p className="text-center mt-2">
-            Sudah punya akun? <Link to="/Login">Masuk</Link>
+            Sudah punya akun? <Link to="/login">Masuk</Link>
           </p>
         </div>
       </div>

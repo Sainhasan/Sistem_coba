@@ -55,11 +55,11 @@ export default function ManageUser() {
       </form>
 
       {/* 🔹 Tabel user */}
-      <div className="table-responsive w-50 rounded-3 bg-white p-1">
+      <div className="table-responsive w-50 rounded-3 shadow-sm">
         {loading ? (
           <p>Memuat data...</p>
         ) : (
-          <table className="table table-borderless table-sm">
+          <table className="table table-hover table-borderless">
             <thead>
               <tr>
                 <th>Nama</th>

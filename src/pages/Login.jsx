@@ -31,7 +31,7 @@ export default function Login() {
       <div className="bg-white bg-opacity-10 p-2 rounded-4 small-card">
         <div className="card p-4 shadow-lg position-relative rounded-4">
           <h3 className="text-center">Login</h3>
-          <form className="my-3" onSubmit={handleLogin}>
+          <form className="my-2" onSubmit={handleLogin}>
             <div>
               <label className="form-label">Email</label>
               <input
@@ -66,10 +66,10 @@ export default function Login() {
                 </span>
               </div>
             </div>
-            <div className="d-flex align-items-center justify-content-center gap-2 mt-3 btn-group-responsive">
+            <div>
               <button
                 type="submit"
-                className="btn w-50 btn-primary rounded-4"
+                className="btn w-100 btn-primary rounded-4"
                 disabled={loading}
               >
                 <div
@@ -79,13 +79,14 @@ export default function Login() {
                   {loading ? <Loader /> : "Login"}
                 </div>
               </button>
-
-              <Link
+              <p className=" text-center mt-1">
+                Belum Punya Akun ? <Link
                 to="/regis"
-                className="btn btn-secondary rounded-4 w-50 small-btn"
+                className="text-decoration-underline"
               >
                 Regis
               </Link>
+              </p>
             </div>
           </form>
         </div>
