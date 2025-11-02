@@ -7,6 +7,8 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "../Firebase";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 export default function UseManageUser() {
   const [members, setMembers] = useState([]);
@@ -74,16 +76,38 @@ export default function UseManageUser() {
   }
 };
 
-  // 🔹 Fungsi menghapus user
+ // 🔹 Fungsi menghapus user (dengan SweetAlert2)
   const handleDelete = async (id) => {
-    if (!confirm("Yakin mau hapus user ini?")) return;
-    try {
-      await deleteDoc(doc(db, "users", id));
-      setStatus("User berhasil dihapus");
-      fetchMembers();
-    } catch (err) {
-      setError("Gagal menghapus user");
-    }
+    Swal.fire({
+      title: "Yakin mau hapus user ini?",
+      text: "Data akan dihapus permanen.",
+      icon: "danger",
+      showCancelButton: true,
+      confirmButtonColor: "rgba(204, 85, 85, 1)",
+      cancelButtonColor: "#559fe4ff",
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteDoc(doc(db, "users", id));
+          fetchMembers();
+          Swal.fire({
+            icon: "success",
+            title: "Dihapus!",
+            text: "User berhasil dihapus.",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+        } catch (err) {
+          Swal.fire({
+            icon: "error",
+            title: "Gagal!",
+            text: "Terjadi kesalahan saat menghapus user.",
+          });
+        }
+      }
+    });
   };
 
   // 🔹 Auto reset error & status
