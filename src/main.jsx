@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Regis from "./pages/Regis";
 import ManageUser from "./pages/ManageUser";
 import Navbar from "./components/Navbar";
+import Profile from "./pages/Profile";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -30,6 +31,7 @@ function AppLayout() {
         <Route path="/login" element={<Login />} />
         <Route path="/regis" element={<Regis />} />
         <Route path="/manage" element={<ManageUser />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
       <SpeedInsights />

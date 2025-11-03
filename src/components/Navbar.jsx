@@ -1,17 +1,11 @@
 import { Link } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth } from "../Firebase";
 import useAuthProfile from "../Function/UseAuthProfile";
 import Refresh from "./Refresh";
 
 export default function Navbar() {
   const { user, profile, loading } = useAuthProfile();
 
-  const handleLogout = async () => {
-    await signOut(auth);
-  };
-
-  if (loading) return <Refresh/>;
+  if (loading) return <Refresh />;
 
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
@@ -53,10 +47,7 @@ export default function Navbar() {
           <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  to="/"
-                >
+                <Link className="nav-link" to="/">
                   Home
                 </Link>
               </li>
@@ -70,28 +61,17 @@ export default function Navbar() {
                   Pricing
                 </Link>
               </li>
-              <li className="nav-item">
+              <li>
                 {user && profile ? (
-                  <>
-                    <div className="FlexNone">
-                      {profile.role === "admin" && (
-                        <Link
-                          to="/manage"
-                          className="nav-link"
-                        >
-                          Manajemen User
-                        </Link>
-                      )}
-                      <button
-                        onClick={handleLogout}
-                        className="FlexNone nav-link"
-                      >
-                        Log Out
-                      </button>
-                    </div>
-                  </>
+                  <div className="FlexNone">
+                    {profile.role === "admin" && (
+                      <Link to="/profile" className="nav-link">
+                        Profile
+                      </Link>
+                    )}
+                  </div>
                 ) : (
-                  <Link to="/login" className="FlexNone nav-link ">
+                  <Link to="/login" className="btn btn-primary btn-sm nav-link">
                     Login
                   </Link>
                 )}
