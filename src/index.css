@@ -9,6 +9,13 @@ html{
   scrollbar-width: none;
 }
 
+.lgnbtn{
+  background-color: rgb(42, 91, 226);
+  color: white;
+  padding: 12%;
+  margin-top: 3%;
+}
+
 .fade-in {
   animation: fadeIn 0.9s ease-in-out;
 }

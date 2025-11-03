@@ -71,7 +71,7 @@ export default function Navbar() {
                     )}
                   </div>
                 ) : (
-                  <Link to="/login" className="btn btn-primary btn-sm nav-link">
+                  <Link to="/login" className="nav-link lgnbtn rounded">
                     Login
                   </Link>
                 )}
