@@ -30,13 +30,29 @@ export default function Navbar() {
           aria-labelledby="offcanvasDarkNavbarLabel"
         >
           <div className="offcanvas-header">
-            <img
+            {user && profile ? (
+                  <div className="FlexNone">
+                    {(profile.role === "admin" || profile.role === "user") && (
+                      <Link to="/profile">
+                      <img
+              src="src\assets\Profil.png"
+              alt="Logo"
+              width="30"
+              height="24"
+              id="offcanvasDarkNavbarLabel"
+            />
+                      </Link>
+                    )}
+                  </div>
+                ) :(
+                  <img
               src="/Logo.png"
               alt="Logo"
               width="30"
               height="24"
               id="offcanvasDarkNavbarLabel"
             />
+                )}
             <button
               type="button"
               className="btn-close btn-close-white"
@@ -64,10 +80,8 @@ export default function Navbar() {
               <li>
                 {user && profile ? (
                   <div className="FlexNone">
-                    {profile.role === "admin" && (
-                      <Link to="/profile" className="nav-link">
-                        Profile
-                      </Link>
+                    {(profile.role === "admin" || profile.role === "user") && (
+                      null
                     )}
                   </div>
                 ) : (

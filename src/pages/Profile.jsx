@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase";
 
+import useAuthProfile from "../Function/UseAuthProfile";
+import Refresh from "../components/Refresh";
+
 export default function Profile() {
+  const { user, profile, loading } = useAuthProfile();
+  if (loading) return <Refresh />;
+
   const handleLogout = async () => {
     await signOut(auth);
   };
@@ -15,12 +21,28 @@ export default function Profile() {
           <div>
             <label>User Profile Information</label>
           </div>
-          <div className="d-flex m-1 justify-content-end">
-            <Link to={"/"}>
-              <button className="btn btn-danger" onClick={handleLogout}>
-                LogOut
-              </button>
-            </Link>
+          <div className="d-flex justify-content-between mt-1">
+            {user && profile ? (
+              <div className="d-flex align-items-center">
+                {profile.role === "admin" && (
+                  <Link to="/manage">
+                    <button className="btn btn-sm btn-success">
+                      Manajemen User
+                    </button>
+                  </Link>
+                )}
+              </div>
+            ) : null}
+            <div className="d-flex">
+              <Link to="/">
+                <button
+                  className="btn btn-sm btn-danger"
+                  onClick={handleLogout}
+                >
+                  LogOut
+                </button>
+              </Link>
+            </div>
           </div>
         </form>
       </div>
