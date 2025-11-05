@@ -8,7 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Regis from "./pages/Regis";
-import ManageUser from "./pages/ManageUser";
+import AddProduct from "./pages/AddProduct";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 
@@ -30,7 +30,7 @@ function AppLayout() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/regis" element={<Regis />} />
-        <Route path="/manage" element={<ManageUser />} />
+        <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
 

@@ -25,9 +25,9 @@ export default function Profile() {
             {user && profile ? (
               <div className="d-flex align-items-center">
                 {profile.role === "admin" && (
-                  <Link to="/manage">
+                  <Link to="/addproduct">
                     <button className="btn btn-sm btn-success">
-                      Manajemen User
+                      Add Product
                     </button>
                   </Link>
                 )}
